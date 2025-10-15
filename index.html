@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kshiyoo Bungalow - Investment Proposal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 2rem 1rem; /* Mobile first */
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow-y: auto; /* Allow scrolling on small screens if content overflows */
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 1.5rem; /* Mobile first */
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+        }
+        .nav-button {
+            position: fixed;
+            bottom: 1rem; /* Mobile first */
+            background-color: #1e3a8a;
+            color: white;
+            border-radius: 9999px;
+            width: 2.75rem; /* Mobile first */
+            height: 2.75rem; /* Mobile first */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem; /* Mobile first */
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 10;
+        }
+        .nav-button:hover {
+            background-color: #1c3170;
+        }
+        #prevBtn {
+            left: 1rem; /* Mobile first */
+        }
+        #nextBtn {
+            right: 1rem; /* Mobile first */
+        }
+         #slideCounter {
+            position: fixed;
+            bottom: 1.5rem; /* Mobile first */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            padding: 0.25rem 0.75rem; /* Mobile first */
+            border-radius: 1rem;
+            font-size: 0.8rem; /* Mobile first */
+            z-index: 10;
+        }
+        h1, h2, h3 {
+            color: #1e3a8a;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+        .stat-item {
+            background-color: #f8fafc;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border-left: 4px solid #3b82f6;
+        }
+        .stat-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+        .stat-item .value {
+            font-size: 1.5rem; /* Mobile first */
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-top: 0.25rem;
+        }
+        .value-negative {
+             color: #dc2626 !important;
+        }
+         .value-positive {
+             color: #16a34a !important;
+        }
+        
+        /* Styles for medium screens and up */
+        @media (min-width: 768px) {
+            .slide {
+                padding: 4rem 2rem;
+            }
+            .card {
+                padding: 2rem;
+            }
+            .nav-button {
+                bottom: 2rem;
+                width: 3rem;
+                height: 3rem;
+                font-size: 1.5rem;
+            }
+            #prevBtn {
+                left: 2rem;
+            }
+            #nextBtn {
+                right: 2rem;
+            }
+            #slideCounter {
+                bottom: 2.5rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+            .stat-item .value {
+                font-size: 1.75rem;
+            }
+            .stat-item p {
+                font-size: 1rem;
+            }
+            .stat-grid {
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title -->
+    <div id="slide1" class="slide active">
+        <div class="card text-center">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Kshiyoo Bungalow, Malavali (Lonavala)</h1>
+            <p class="text-lg md:text-2xl text-gray-600">An Investment Proposal & Financial Overview</p>
+            <div class="mt-8 text-base md:text-lg text-gray-500">Prepared for 5 Partners</div>
+        </div>
+    </div>
+
+    <!-- Slide 2: The Opportunity -->
+    <div id="slide2" class="slide">
+        <div class="card">
+             <h2 class="text-2xl md:text-3xl font-bold mb-6">The Opportunity</h2>
+             <div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+                <div class="md:w-1/2 text-left space-y-4 text-gray-700 text-base md:text-lg">
+                    <p>This proposal outlines the joint acquisition of the Kshiyoo Bungalow, a premium property located in Malavali, Lonavala.</p>
+                    <p>The investment is structured as a partnership among 5 individuals, sharing costs and potential returns.</p>
+                    <p>Lonavala is a high-demand location for vacation rentals, offering a strong potential for generating annual income.</p>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="image_49926c.jpg" alt="Kshiyoo Bungalow in Lonavala" class="rounded-lg shadow-lg w-full h-auto">
+                </div>
+             </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Purchase & Loan Breakdown -->
+    <div id="slide3" class="slide">
+        <div class="card">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6">Purchase & Loan Breakdown</h2>
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/2 w-full">
+                    <canvas id="costChart"></canvas>
+                </div>
+                <div class="md:w-1/2 w-full">
+                    <div class="stat-grid grid-cols-1">
+                        <div class="stat-item">
+                            <p>Total Property Cost</p>
+                            <p class="value">₹ 1,80,00,000</p>
+                        </div>
+                        <div class="stat-item border-blue-300">
+                            <p>Total Down Payment (5 Partners)</p>
+                            <p class="value">₹ 20,00,000</p>
+                        </div>
+                         <div class="stat-item border-blue-500">
+                            <p>Total Loan Amount</p>
+                            <p class="value">₹ 1,60,00,000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Loan Details -->
+    <div id="slide4" class="slide">
+        <div class="card">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6">Loan Details</h2>
+            <div class="stat-grid grid-cols-1 sm:grid-cols-2">
+                <div class="stat-item col-span-1">
+                    <p>Loan Tenure</p>
+                    <p class="value">30 Years</p>
+                </div>
+                <div class="stat-item col-span-1">
+                    <p>Interest Rate (ROI)</p>
+                    <p class="value">8.0%</p>
+                </div>
+                <div class="stat-item">
+                    <p>Total Monthly EMI</p>
+                    <p class="value">₹ 1,17,400</p>
+                </div>
+                 <div class="stat-item">
+                    <p>EMI Per Person</p>
+                    <p class="value">₹ 23,480</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Projected Operating Expenses -->
+    <div id="slide5" class="slide">
+        <div class="card">
+             <h2 class="text-2xl md:text-3xl font-bold mb-6">Projected Operating Expenses</h2>
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/2 w-full">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+                <div class="md:w-1/2 w-full text-left">
+                     <div class="space-y-2 text-sm sm:text-base">
+                        <div class="flex justify-between items-center p-2 sm:p-3 rounded-lg bg-gray-50">
+                            <span class="font-medium text-gray-700">Care Taker:</span>
+                            <span class="font-bold text-gray-900">₹ 15,000</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 sm:p-3 rounded-lg bg-gray-50">
+                            <span class="font-medium text-gray-700">Electricity:</span>
+                            <span class="font-bold text-gray-900">₹ 10,000</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 sm:p-3 rounded-lg bg-gray-50">
+                            <span class="font-medium text-gray-700">Housekeeping:</span>
+                            <span class="font-bold text-gray-900">₹ 7,000</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 sm:p-3 rounded-lg bg-gray-50">
+                            <span class="font-medium text-gray-700">Upkeep:</span>
+                            <span class="font-bold text-gray-900">₹ 6,000</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 sm:p-3 rounded-lg bg-gray-50">
+                            <span class="font-medium text-gray-700">Police:</span>
+                            <span class="font-bold text-gray-900">₹ 2,000</span>
+                        </div>
+                     </div>
+                     <div class="stat-item mt-4 border-gray-500">
+                        <p>Total Monthly Expenses</p>
+                        <p class="value">₹ 40,000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Projected Annual Finances -->
+    <div id="slide6" class="slide">
+        <div class="card">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6">Projected Annual Finances</h2>
+            <p class="text-gray-600 -mt-4 mb-6 text-sm md:text-base">Note: Projected Income is net of operating expenses.</p>
+            <div class="stat-grid grid-cols-1 md:grid-cols-2">
+                <div class="stat-item">
+                    <p>Est. Net Annual Income</p>
+                    <p class="value value-positive">₹ 12L - 15L</p>
+                </div>
+                <div class="stat-item">
+                    <p>Total Yearly EMI</p>
+                    <p class="value value-negative">₹ 14,08,800</p>
+                </div>
+                <div class="stat-item bg-red-50 border-red-500">
+                    <p>Annual Shortfall (Worst Case)</p>
+                    <p class="value value-negative">- ₹ 2,08,800</p>
+                </div>
+                <div class="stat-item bg-green-50 border-green-500">
+                    <p>Annual Surplus (Best Case)</p>
+                    <p class="value value-positive">+ ₹ 91,200</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Per Person Contribution Summary -->
+    <div id="slide7" class="slide">
+        <div class="card">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6">Per Person Financial Summary</h2>
+            <div class="stat-grid grid-cols-1">
+                 <div class="stat-item col-span-1">
+                    <p>One-Time Down Payment</p>
+                    <p class="value">₹ 4,00,000</p>
+                </div>
+                 <div class="stat-item col-span-1 bg-blue-50 border-blue-500">
+                    <p>Net Monthly Cashflow (Est.)</p>
+                    <p class="value">- ₹ 3,480 to + ₹ 1,520</p>
+                    <p class="text-xs sm:text-sm mt-1">This is the final monthly amount you will pay (cost) or receive (profit) after rental income is applied to the loan EMI.</p>
+                </div>
+                <div class="text-left text-gray-600 mt-4 text-sm md:text-base space-y-2">
+                    <p><strong>Worst-case:</strong> each partner contributes an additional <strong>₹3,480/month</strong>.</p>
+                    <p><strong>Best-case:</strong> each partner receives a profit of <strong>₹1,520/month</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: 5-Year Financial Projection -->
+    <div id="slide8" class="slide">
+        <div class="card">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6">5-Year Financial Projection</h2>
+            <p class="text-gray-600 -mt-4 mb-6 text-sm md:text-base">Assuming a 5% annual increase in net rental income against a fixed EMI.</p>
+            <div class="flex flex-col lg:flex-row items-center gap-8">
+                <div class="w-full lg:w-2/3">
+                     <canvas id="projectionChart"></canvas>
+                </div>
+                <div class="w-full lg:w-1/3 text-left">
+                     <div class="stat-item bg-green-50 border-green-500 mb-4">
+                        <p>Breakeven Point</p>
+                        <p class="value">Year 4-5</p>
+                        <p class="text-xs sm:text-sm mt-1">Projected to become profitable (worst-case) by Year 5.</p>
+                    </div>
+                     <div class="stat-item bg-blue-50 border-blue-500">
+                        <p>Year 5 Surplus (Best Case)</p>
+                        <p class="value value-positive">+ ₹ 4.14L</p>
+                        <p class="text-xs sm:text-sm mt-1">(+ ₹ 6,907 per person/month)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Discussion & Next Steps -->
+    <div id="slide9" class="slide">
+        <div class="card">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6">Discussion & Next Steps</h2>
+            <div class="text-left text-base text-gray-700 space-y-4 max-w-2xl mx-auto">
+                <div>
+                    <h3 class="font-semibold text-lg md:text-xl mb-2 text-gray-800">Key Takeaways:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm md:text-base">
+                        <li>Initial investment: <strong>₹4 Lakhs</strong> per partner.</li>
+                        <li>Year 1 monthly cashflow: <strong>-₹3.5k</strong> (cost) to <strong>+₹1.5k</strong> (profit) per partner.</li>
+                        <li>Profitability for all is expected by <strong>Year 5</strong>.</li>
+                        <li>Success hinges on annual rental income exceeding ~₹14.1 Lakhs.</li>
+                    </ul>
+                </div>
+                 <div>
+                    <h3 class="font-semibold text-lg md:text-xl mb-2 text-gray-800">Points for Discussion:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm md:text-base">
+                        <li>Strategy for managing the initial cash shortfall.</li>
+                        <li>Marketing approach to maximize rental income.</li>
+                        <li>Policy for personal use of the bungalow.</li>
+                        <li>Formation of a formal partnership agreement.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Navigation -->
+    <div id="prevBtn" class="nav-button">&#x2190;</div>
+    <div id="nextBtn" class="nav-button">&#x2192;</div>
+    <div id="slideCounter">1 / 9</div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 9;
+        const slideCounter = document.getElementById('slideCounter');
+
+        function showSlide(slideNumber) {
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            const newSlide = document.getElementById(`slide${slideNumber}`);
+            if (newSlide) {
+                newSlide.classList.add('active');
+            }
+            slideCounter.textContent = `${slideNumber} / ${totalSlides}`;
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+        
+        // Initial setup
+        showSlide(currentSlide);
+        
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        
+        // Chart for Slide 3
+        const costCtx = document.getElementById('costChart').getContext('2d');
+        const costChart = new Chart(costCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Loan Amount', 'Down Payment'],
+                datasets: [{
+                    label: 'Cost Breakdown',
+                    data: [16000000, 2000000],
+                    backgroundColor: [
+                        '#3b82f6',
+                        '#93c5fd',
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                         callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(context.parsed);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart for Slide 5
+        const expenseCtx = document.getElementById('expenseChart').getContext('2d');
+        const expenseChart = new Chart(expenseCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Care Taker', 'Electricity', 'Housekeeping', 'Upkeep', 'Police'],
+                datasets: [{
+                    label: 'Monthly Expenses',
+                    data: [15000, 10000, 7000, 6000, 2000],
+                    backgroundColor: [
+                        '#003f5c',
+                        '#58508d',
+                        '#bc5090',
+                        '#ff6361',
+                        '#ffa600'
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                     tooltip: {
+                         callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(context.parsed);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Chart for Slide 8
+        const projectionCtx = document.getElementById('projectionChart').getContext('2d');
+        const projectionChart = new Chart(projectionCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [{
+                    label: 'Worst Case Cashflow',
+                    data: [-208800, -148800, -85800, -19650, 49808],
+                    backgroundColor: '#ef4444',
+                    borderColor: '#dc2626',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Best Case Cashflow',
+                    data: [91200, 166200, 244950, 327638, 414459],
+                    backgroundColor: '#22c55e',
+                    borderColor: '#16a34a',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                         callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                     label += new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0, notation: 'compact' }).format(value);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
+    </script>
+</body>
+</html>
+
